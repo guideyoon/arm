@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import salonData from '@/data/salon.json'
 
 export const metadata: Metadata = {
@@ -12,6 +13,8 @@ export default function SpacePage() {
     '차분한 색감',
     '프라이버시를 고려한 좌석 배치',
   ]
+
+  const spaceImages = ['/g1.png', '/g2.png', '/g3.png', '/g4.png']
 
   return (
     <div className="pt-16">
@@ -28,10 +31,15 @@ export default function SpacePage() {
 
         {/* Space Images Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-          {[1, 2, 3, 4].map((item) => (
-            <div key={item} className="relative h-80 bg-light-gray">
-              {/* Placeholder for space images */}
-              <div className="absolute inset-0 bg-gradient-to-br from-rose-beige/20 to-champagne/20" />
+          {spaceImages.map((image, index) => (
+            <div key={index} className="relative h-80 bg-light-gray">
+              <Image
+                src={image}
+                alt={`공간 이미지 ${index + 1}`}
+                fill
+                className="object-cover"
+                priority={index < 2}
+              />
             </div>
           ))}
         </div>
