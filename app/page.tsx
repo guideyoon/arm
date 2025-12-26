@@ -1,4 +1,8 @@
+'use client'
+
 import Link from 'next/link'
+import Image from 'next/image'
+import { useEffect, useState } from 'react'
 import salonData from '@/data/salon.json'
 
 export default function Home() {
@@ -9,10 +13,38 @@ export default function Home() {
     salonData.services.클리닉[0],
   ]
 
+  const heroImages = ['/h1.jpg', '/h2.png', '/h3.png']
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length)
+    }, 5000) // 5초마다 이미지 변경
+
+    return () => clearInterval(interval)
+  }, [heroImages.length])
+
   return (
     <div className="pt-16">
       {/* Hero Section */}
-      <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center">
+      <section className="relative h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+        {/* Hero Images */}
+        {heroImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <Image
+              src={image}
+              alt={`히어로 이미지 ${index + 1}`}
+              fill
+              className="object-cover"
+              priority={index === 0}
+            />
+          </div>
+        ))}
         <div className="absolute inset-0 bg-charcoal/30 z-10" />
         <div className="relative z-20 text-center text-white px-4">
           <h1 className="text-3xl md:text-5xl font-medium mb-4">
@@ -36,8 +68,6 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        {/* Placeholder for hero image - replace with actual image */}
-        <div className="absolute inset-0 bg-gradient-to-br from-rose-beige/20 to-champagne/20" />
       </section>
 
       {/* Introduction Section */}
