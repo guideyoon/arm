@@ -16,11 +16,17 @@ export default function LocationPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Map Section */}
-          <div className="h-96 bg-light-gray relative">
-            {/* Placeholder for map - Replace with actual map component (e.g., Kakao Map, Google Map) */}
-            <div className="absolute inset-0 flex items-center justify-center text-dark-gray">
-              지도 영역 (카카오맵 또는 구글맵 연동)
-            </div>
+          <div className="h-96 bg-light-gray relative rounded-lg overflow-hidden">
+            <iframe
+              src={`https://www.google.com/maps?q=${encodeURIComponent(salonData.info.address)}&output=embed`}
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="미용실 아름 위치"
+            />
           </div>
 
           {/* Information Section */}
