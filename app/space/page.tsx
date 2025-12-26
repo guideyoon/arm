@@ -8,12 +8,6 @@ export const metadata: Metadata = {
 }
 
 export default function SpacePage() {
-  const spaceFeatures = [
-    '밝은 자연광',
-    '차분한 색감',
-    '프라이버시를 고려한 좌석 배치',
-  ]
-
   const spaceImages = ['/g1.png', '/g2.png', '/g3.png', '/g4.png']
 
   return (
@@ -30,7 +24,7 @@ export default function SpacePage() {
         </div>
 
         {/* Space Images Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {spaceImages.map((image, index) => (
             <div key={index} className="relative h-80 bg-light-gray">
               <Image
@@ -40,17 +34,6 @@ export default function SpacePage() {
                 className="object-cover"
                 priority={index < 2}
               />
-            </div>
-          ))}
-        </div>
-
-        {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {spaceFeatures.map((feature, index) => (
-            <div key={index} className="text-center">
-              <h3 className="text-xl font-medium text-charcoal mb-2">
-                {feature}
-              </h3>
             </div>
           ))}
         </div>
