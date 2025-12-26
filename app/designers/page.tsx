@@ -1,9 +1,15 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import salonData from '@/data/salon.json'
 
 export const metadata: Metadata = {
   title: '디자이너 소개 - 미용실 아름',
   description: '경험과 전문성을 갖춘 디자이너들을 소개합니다.',
+}
+
+const designerImages: Record<string, string> = {
+  '김아름': '/arm.png',
+  '이미래': '/mirae.png',
 }
 
 export default function DesignersPage() {
@@ -21,8 +27,17 @@ export default function DesignersPage() {
               className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center"
             >
               <div className="relative h-96 bg-light-gray">
-                {/* Placeholder for designer image */}
-                <div className="absolute inset-0 bg-gradient-to-br from-rose-beige/20 to-champagne/20" />
+                {designerImages[designer.name] ? (
+                  <Image
+                    src={designerImages[designer.name]}
+                    alt={designer.name}
+                    fill
+                    className="object-cover"
+                    priority={index === 0}
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-rose-beige/20 to-champagne/20" />
+                )}
               </div>
               <div>
                 <h2 className="text-3xl font-medium text-charcoal mb-2">
